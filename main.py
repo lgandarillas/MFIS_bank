@@ -7,31 +7,52 @@ from Classes import *
 
 def main():
     #read files
-    input_file = readFuzzySetsFile('InputVarSets.txt')
-    output_file = readFuzzySetsFile('Risks.txt')
+    fuzzySetsDict = readFuzzySetsFile('InputVarSets.txt')
+    out_fuzzy_sets = readFuzzySetsFile('Risks.txt')
     rules = readRulesFile()
     applications = readApplicationsFile()
     result_file = open('Results.txt', 'w')
 
     for app in applications:
-        fuzzy(app, input_file)
-        for fset in input_file.values():
+        fuzzy(app, fuzzySetsDict)
+
+        for fset in fuzzySetsDict.values():
             print(fset.memDegree)
-        print("\n")
-        #analyze_rules(rules, f_dict)
+
+        analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets)
+        for fset in out_fuzzy_sets.values():
+            fset.printSet()
 
 
-def analyze_rules(rules, f_dict):
-    pass 
-   # for rule in rules:
-   #     print(rule.antecedent)
-   #     print('\n')
+def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
+
+    for fset in out_fuzzy_sets.values():
+            fset.memDegree = 0
+
+    for rule in rules:
+        print(rule.consequent, rule.antecedent)
+        min = 1
+
+        for i in range(0, len(rule.antecedent)):
+            var = fuzzySetsDict[rule.antecedent[i]].memDegree
+            print("Var = ", var)
+            if var < min:
+                min = var
+                print("Min = ", min)
+        print(out_fuzzy_sets[rule.consequent].memDegree)
+        if min >= out_fuzzy_sets[rule.consequent].memDegree:
+            out_fuzzy_sets[rule.consequent].memDegree = min
+        print('\n')
 
 
 
-def fuzzy(app, input_file):
 
-    for fset in input_file.values():
+
+
+
+def fuzzy(app, fuzzySetsDict):
+
+    for fset in fuzzySetsDict.values():
         if fset.var == "Age":
             age = app.data[0][1]
             membership = skf.interp_membership(fset.x, fset.y, age)
