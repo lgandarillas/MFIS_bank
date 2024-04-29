@@ -2,7 +2,7 @@
 import numpy as np
 import skfuzzy as skf
 import matplotlib.pyplot as plt
-from MFIS_Classes import *
+from Classes import *
 
 def readFuzzySetsFile(fleName):
     """
