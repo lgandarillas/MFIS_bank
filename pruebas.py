@@ -16,6 +16,8 @@ def main():
 
     for app in applications:
 
+        membership_dict = {}
+
         for fset in input_file.values():
             if fset.var == "Age":
                 age = app.data[0][1]
@@ -44,6 +46,11 @@ def main():
                 print("Error\n")
 
             print(fset.var + ' ' + fset.label + ": "  + str(membership))
+
+            membership_dict[(fset.var, fset.label)] = membership
+
+        print("\n")
+        print(membership_dict)
 
         print("\n")
 

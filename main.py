@@ -13,52 +13,55 @@ def main():
     applications = readApplicationsFile()
     result_file = open('Results.txt', 'w')
 
-
-def fuzzy(applications, input_file):
-
     for app in applications:
-
+        fuzzy(app, input_file)
         for fset in input_file.values():
-            if fset.var == "Age":
-                age = app.data[0][1]
-                age_mf = skf.interp_membership(fset.x, fset.y, age)
-                print(fset.var + ' ' + fset.label + ": "  + str(age_mf))
-
-            if fset.var == "IncomeLevel":
-                income = app.data[1][1]
-                income_mf = skf.interp_membership(fset.x, fset.y, income)
-                print(fset.var + ' ' + fset.label + ": "  + str(income_mf))
-
-            if fset.var == "Assets":
-                assets = app.data[2][1]
-                assets_mf = skf.interp_membership(fset.x, fset.y, assets)
-                print(fset.var + ' ' + fset.label  + ": "  + str(assets_mf))
-
-            if fset.var == "Amount":
-                amount = app.data[3][1]
-                amount_mf = skf.interp_membership(fset.x, fset.y, amount)
-                print(fset.var + ' ' + fset.label + ": "  + str(amount_mf))
-
-            if fset.var == "Job":
-                job = app.data[4][1]
-                job_mf = skf.interp_membership(fset.x, fset.y, job)
-                print(fset.var + ' ' + fset.label + ": "  + str(job_mf))
-
-            if fset.var == "History":
-                history = app.data[5][1]
-                history_mf = skf.interp_membership(fset.x, fset.y, history)
-                print(fset.var + ' ' + fset.label + ": "  + str(history_mf))
-
+            print(fset.memDegree)
         print("\n")
+        #analyze_rules(rules, f_dict)
+
+
+def analyze_rules(rules, f_dict):
+    pass 
+   # for rule in rules:
+   #     print(rule.antecedent)
+   #     print('\n')
 
 
 
+def fuzzy(app, input_file):
+
+    for fset in input_file.values():
+        if fset.var == "Age":
+            age = app.data[0][1]
+            membership = skf.interp_membership(fset.x, fset.y, age)
+
+        elif fset.var == "IncomeLevel":
+            income = app.data[1][1]
+            membership = skf.interp_membership(fset.x, fset.y, income)
+
+        elif fset.var == "Assets":
+            assets = app.data[2][1]
+            membership = skf.interp_membership(fset.x, fset.y, assets)
+
+        elif fset.var == "Amount":
+            amount = app.data[3][1]
+            membership = skf.interp_membership(fset.x, fset.y, amount)
+
+        elif fset.var == "Job":
+            job = app.data[4][1]
+            membership = skf.interp_membership(fset.x, fset.y, job)
+
+        elif fset.var == "History":
+            history = app.data[5][1]
+            membership = skf.interp_membership(fset.x, fset.y, history)
+        else:
+            print("Error\n")
+
+        fset.memDegree = membership
 
 
 
 if __name__ == "__main__":
     main()
-
-
-
 
