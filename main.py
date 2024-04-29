@@ -1,8 +1,8 @@
 import numpy as np
 import skfuzzy as skf
 import matplotlib.pyplot as plt
-from MFIS_Read_Functions import *
-from MFIS_Classes import *
+from read_utils import *
+from Classes import *
 
 
 def main():
