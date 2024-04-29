@@ -17,24 +17,45 @@ def main():
         fuzzy(app, input_file)
 
 def fuzzy(app, input_file):
-    age = app.data[0]
-    income = app.data[1]
-    assets = app.data[2]
-    amount = app.data[3]
-    job = app.data[4]
-    history = app.data[5]
 
-    for fuzz_set in input_file.values():
-        if fuzz_set.var == 'Age':
-            if fuzz_set.label == 'Young':
-                fuzz_set.memDegree = skf.interp_membership(fuzz_set.x, fuzz_set.y, float(age))
-                print(fuzz_set.memDegree)
-            elif fuzz_set.label == 'Adult':
-                fuzz_set.memDegree = skf.interp_membership(fuzz_set.x, fuzz_set.y, age)
-                print(fuzz_set.memDegree)
-            else:
-                fuzz_set.memDegree = skf.interp_membership(fuzz_set.x, fuzz_set.y, age)
-                print(fuzz_set.memDegree)
+    for app in applications:
+
+        for fset in input_file.values():
+            if fset.var == "Age":
+                age = app.data[0][1]
+                age_mf = skf.interp_membership(fset.x, fset.y, age)
+                print(fset.var + ' ' + fset.label + ": "  + str(age_mf))
+
+            if fset.var == "IncomeLevel":
+                income = app.data[1][1]
+                income_mf = skf.interp_membership(fset.x, fset.y, income)
+                print(fset.var + ' ' + fset.label + ": "  + str(income_mf))
+
+            if fset.var == "Assets":
+                assets = app.data[2][1]
+                assets_mf = skf.interp_membership(fset.x, fset.y, assets)
+                print(fset.var + ' ' + fset.label  + ": "  + str(assets_mf))
+
+            if fset.var == "Amount":
+                amount = app.data[3][1]
+                amount_mf = skf.interp_membership(fset.x, fset.y, amount)
+                print(fset.var + ' ' + fset.label + ": "  + str(amount_mf))
+
+            if fset.var == "Job":
+                job = app.data[4][1]
+                job_mf = skf.interp_membership(fset.x, fset.y, job)
+                print(fset.var + ' ' + fset.label + ": "  + str(job_mf))
+
+            if fset.var == "History":
+                history = app.data[5][1]
+                history_mf = skf.interp_membership(fset.x, fset.y, history)
+                print(fset.var + ' ' + fset.label + ": "  + str(history_mf))
+
+        print("\n")
+
+
+
+
 
 
 if __name__ == "__main__":
@@ -42,10 +63,4 @@ if __name__ == "__main__":
 
 
 
-"""
-    for app in applications:
-        x = processApplication(app, imput_file, output_file, rules)
-        output_file.write(app.appId + ' ' + str(x) + '\n')
-
-"""
 
