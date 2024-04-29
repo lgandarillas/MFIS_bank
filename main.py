@@ -13,10 +13,8 @@ def main():
     applications = readApplicationsFile()
     result_file = open('Results.txt', 'w')
 
-    for app in applications:
-        fuzzy(app, input_file)
 
-def fuzzy(app, input_file):
+def fuzzy(applications, input_file):
 
     for app in applications:
 

@@ -19,35 +19,31 @@ def main():
         for fset in input_file.values():
             if fset.var == "Age":
                 age = app.data[0][1]
-                age_mf = skf.interp_membership(fset.x, fset.y, age)
-                print(fset.var + ' ' + fset.label + ": "  + str(age_mf))
+                membership = skf.interp_membership(fset.x, fset.y, age)
 
-            if fset.var == "IncomeLevel":
+            elif fset.var == "IncomeLevel":
                 income = app.data[1][1]
-                income_mf = skf.interp_membership(fset.x, fset.y, income)
-                print(fset.var + ' ' + fset.label + str(income_mf))
+                membership = skf.interp_membership(fset.x, fset.y, income)
 
-            if fset.var == "Assets":
+            elif fset.var == "Assets":
                 assets = app.data[2][1]
-                assets_mf = skf.interp_membership(fset.x, fset.y, assets)
-                print(fset.var + ' ' + fset.label  + str(assets_mf))
+                membership = skf.interp_membership(fset.x, fset.y, assets)
 
-            if fset.var == "Amount":
+            elif fset.var == "Amount":
                 amount = app.data[3][1]
-                amount_mf = skf.interp_membership(fset.x, fset.y, amount)
-                print(fset.var + ' ' + fset.label + str(amount_mf))
+                membership = skf.interp_membership(fset.x, fset.y, amount)
 
-            if fset.var == "Job":
+            elif fset.var == "Job":
                 job = app.data[4][1]
-                job_mf = skf.interp_membership(fset.x, fset.y, job)
-                print(fset.var + ' ' + fset.label + str(job_mf))
+                membership = skf.interp_membership(fset.x, fset.y, job)
 
-            if fset.var == "History":
+            elif fset.var == "History":
                 history = app.data[5][1]
-                history_mf = skf.interp_membership(fset.x, fset.y, history)
-                print(fset.var + ' ' + fset.label + str(history_mf))
+                membership = skf.interp_membership(fset.x, fset.y, history)
+            else:
+                print("Error\n")
 
-
+            print(fset.var + ' ' + fset.label + ": "  + str(membership))
 
         print("\n")
 
