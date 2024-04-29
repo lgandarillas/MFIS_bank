@@ -11,9 +11,12 @@ def main():
     rules = readRulesFile()
     applications = readApplicationsFile()
 
+    for app in applications:
+        print(app[1])
+
     for fset in input_file.values():
-        print(fset.x)
-        print(fset.y)
+        #print(fset.x)
+        #print(fset.y)
         print("Membresia: " + str(skf.interp_membership(fset.x, fset.y, 35)))
 
 if __name__ == '__main__':
