@@ -14,40 +14,38 @@ def main():
     #for fset in input_file.values():
     #    print(fset.var)
 
-    lables = ["Age", "IncomeLevel", "Assets", "Amount", "Job", "History"]
-
     for app in applications:
 
         for fset in input_file.values():
-            if fset.var == lables[0]:
+            if fset.var == "Age":
                 age = app.data[0][1]
                 age_mf = skf.interp_membership(fset.x, fset.y, age)
-                print("Membresia: " + str(age_mf))
+                print(fset.var + ' ' + fset.label + ": "  + str(age_mf))
 
-            if fset.var == lables[1]:
+            if fset.var == "IncomeLevel":
                 income = app.data[1][1]
                 income_mf = skf.interp_membership(fset.x, fset.y, income)
-                print("Membresia: " + str(income_mf))
+                print(fset.var + ' ' + fset.label + str(income_mf))
 
-            if fset.var == lables[2]:
+            if fset.var == "Assets":
                 assets = app.data[2][1]
                 assets_mf = skf.interp_membership(fset.x, fset.y, assets)
-                print("Membresia: " + str(assets_mf))
+                print(fset.var + ' ' + fset.label  + str(assets_mf))
 
-            if fset.var == lables[3]:
+            if fset.var == "Amount":
                 amount = app.data[3][1]
                 amount_mf = skf.interp_membership(fset.x, fset.y, amount)
-                print("Membresia: " + str(amount_mf))
+                print(fset.var + ' ' + fset.label + str(amount_mf))
 
-            if fset.var == lables[4]:
+            if fset.var == "Job":
                 job = app.data[4][1]
                 job_mf = skf.interp_membership(fset.x, fset.y, job)
-                print("Membresia: " + str(job_mf))
+                print(fset.var + ' ' + fset.label + str(job_mf))
 
-            if fset.var == lables[5]:
+            if fset.var == "History":
                 history = app.data[5][1]
                 history_mf = skf.interp_membership(fset.x, fset.y, history)
-                print("Membresia: " + str(history_mf))
+                print(fset.var + ' ' + fset.label + str(history_mf))
 
 
 
