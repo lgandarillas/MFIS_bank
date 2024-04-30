@@ -7,11 +7,11 @@ from Classes import *
 
 def main():
     #read files
-    fuzzySetsDict = readFuzzySetsFile('InputVarSets.txt')
-    out_fuzzy_sets = readFuzzySetsFile('Risks.txt')
+    fuzzySetsDict = readFuzzySetsFile('Files/InputVarSets.txt')
+    out_fuzzy_sets = readFuzzySetsFile('Files/Risks.txt')
     rules = readRulesFile()
     applications = readApplicationsFile()
-    result_file = open('Results.txt', 'w')
+    result_file = open('Files/Results.txt', 'w')
 
     for app in applications:
         fuzzy(app, fuzzySetsDict)
@@ -45,11 +45,6 @@ def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
         print('\n')
 
 
-
-
-
-
-
 def fuzzy(app, fuzzySetsDict):
 
     for fset in fuzzySetsDict.values():
@@ -80,7 +75,6 @@ def fuzzy(app, fuzzySetsDict):
             print("Error\n")
 
         fset.memDegree = membership
-
 
 
 if __name__ == "__main__":
