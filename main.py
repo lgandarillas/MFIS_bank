@@ -16,13 +16,32 @@ def main():
     for app in applications:
         fuzzy(app, fuzzySetsDict)
 
-        for fset in fuzzySetsDict.values():
-            print(fset.memDegree)
+        #for fset in fuzzySetsDict.values():
+            #print(fset.memDegree)
 
         analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets)
-        for fset in out_fuzzy_sets.values():
-            fset.printSet()
+        #for fset in out_fuzzy_sets.values():
+            #fset.printSet()
+        result = defuzzify(out_fuzzy_sets)
+        result_file.write(str(app.appId)+ " " + str(result) + "\n")
 
+
+def defuzzify(out_fuzzy_sets):
+    set_list = []
+    nums = np.arange(100)
+    for fset in out_fuzzy_sets.values():
+        dset = []
+        for i in fset.y:
+            if i > fset.memDegree:
+                dset.append(fset.memDegree)
+            else:
+                dset.append(i)
+        set_list.append(dset)
+    lmaximum = np.maximum(set_list[0], np.maximum(set_list[1], set_list[2]))
+    #print(lmaximum)
+    result = skf.defuzzify.centroid(nums, lmaximum)
+    print("Result = ", result)
+    return result
 
 def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
 
@@ -30,19 +49,19 @@ def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
             fset.memDegree = 0
 
     for rule in rules:
-        print(rule.consequent, rule.antecedent)
+        #print(rule.consequent, rule.antecedent)
         min = 1
 
         for i in range(0, len(rule.antecedent)):
             var = fuzzySetsDict[rule.antecedent[i]].memDegree
-            print("Var = ", var)
+            #print("Var = ", var)
             if var < min:
                 min = var
-                print("Min = ", min)
-        print(out_fuzzy_sets[rule.consequent].memDegree)
+                #print("Min = ", min)
+        #print(out_fuzzy_sets[rule.consequent].memDegree)
         if min >= out_fuzzy_sets[rule.consequent].memDegree:
             out_fuzzy_sets[rule.consequent].memDegree = min
-        print('\n')
+        #print('\n')
 
 
 def fuzzy(app, fuzzySetsDict):
