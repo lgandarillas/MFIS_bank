@@ -9,6 +9,7 @@ import numpy as np
 import skfuzzy as skf
 from read import read_fuzzy_sets_file, read_rules_file, read_applications_file
 
+
 def main():
     """Reads the input files, processes the data and writes the results to an output file."""
     fuzzy_sets_dict = read_fuzzy_sets_file('Files/InputVarSets.txt')
