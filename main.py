@@ -55,14 +55,15 @@ def analyze_rules(rules, fuzzy_sets_dict, out_fuzzy_sets):
         fset.memDegree = 0
 
     for rule in rules:
-        min = 1
+        min_num = 1
+        for antecedent_i in rule.antecedent:
+            var = fuzzy_sets_dict[antecedent_i].memDegree
+            if var < min_num:
+                min_num = var
 
-        for i in range(0, len(rule.antecedent)):
-            var = fuzzy_sets_dict[rule.antecedent[i]].memDegree
-            if var < min:
-                min = var
-        if min >= out_fuzzy_sets[rule.consequent].memDegree:
-            out_fuzzy_sets[rule.consequent].memDegree = min
+        if min_num >= out_fuzzy_sets[rule.consequent].memDegree:
+            out_fuzzy_sets[rule.consequent].memDegree = min_num
+
 
 def fuzzy(app, fuzzy_sets_dict):
     """Calculates the membership degrees for the input fuzzy sets."""

@@ -7,7 +7,7 @@ Reads the input files, processes the data and writes the results to an output fi
 import numpy as np
 import skfuzzy as skf
 # import matplotlib.pyplot as plt -> No se usa
-from classes import *
+from classes import FuzzySetsDict, FuzzySet, RuleList, Rule, Application
 
 def read_fuzzy_sets_file(file_name):
     """
