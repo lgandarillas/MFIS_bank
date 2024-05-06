@@ -40,7 +40,6 @@ def defuzzify(out_fuzzy_sets):
     lmaximum = np.maximum(set_list[0], np.maximum(set_list[1], set_list[2]))
     result = skf.defuzzify.centroid(nums, lmaximum)
     print("Result = ", result)
-    return result
 
 def analyze_rules(rules, fuzzy_sets_dict, out_fuzzy_sets):
     """Analyzes the rules and updates the output fuzzy sets."""
