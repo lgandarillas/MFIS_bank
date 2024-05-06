@@ -1,25 +1,30 @@
+#!/usr/bin/env python3
+"""
+This module is the main module of the project. It reads the input files,
+processes the data andwrites the results to an output file.
+"""
+
 import numpy as np
 import skfuzzy as skf
-import matplotlib.pyplot as plt
-from read_utils import *
-from Classes import *
-
+# import matplotlib.pyplot as plt -> No se usa
+from read import readFuzzySetsFile, readRulesFile, readApplicationsFile
+#from classes import FuzzySetsDict, FuzzySet, RuleList, Rule, Application -> No se usa
 
 def main():
-    #read files
-    fuzzySetsDict = readFuzzySetsFile('Files/InputVarSets.txt')
+    """Reads the input files, processes the data and writes the results to an output file."""
+    fuzzy_sets_dict = readFuzzySetsFile('Files/InputVarSets.txt')
     out_fuzzy_sets = readFuzzySetsFile('Files/Risks.txt')
     rules = readRulesFile()
     applications = readApplicationsFile()
-    result_file = open('Files/Results.txt', 'w')
+    result_file = open('Files/Results.txt', 'w', encoding='utf-8')
 
     for app in applications:
-        fuzzy(app, fuzzySetsDict)
+        fuzzy(app, fuzzy_sets_dict)
 
-        #for fset in fuzzySetsDict.values():
+        #for fset in fuzzy_sets_dict.values():
             #print(fset.memDegree)
 
-        analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets)
+        analyze_rules(rules, fuzzy_sets_dict, out_fuzzy_sets)
         #for fset in out_fuzzy_sets.values():
             #fset.printSet()
         result = defuzzify(out_fuzzy_sets)
@@ -27,6 +32,7 @@ def main():
 
 
 def defuzzify(out_fuzzy_sets):
+    """Defuzzifies the output fuzzy sets and returns the result."""
     set_list = []
     nums = np.arange(100)
     for fset in out_fuzzy_sets.values():
@@ -44,7 +50,7 @@ def defuzzify(out_fuzzy_sets):
     return result
 
 def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
-
+    """Analyzes the rules and updates the output fuzzy sets."""
     for fset in out_fuzzy_sets.values():
             fset.memDegree = 0
 
@@ -63,10 +69,9 @@ def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
             out_fuzzy_sets[rule.consequent].memDegree = min
         #print('\n')
 
-
-def fuzzy(app, fuzzySetsDict):
-
-    for fset in fuzzySetsDict.values():
+def fuzzy(app, fuzzy_sets_dict):
+    """Calculates the membership degrees for the input fuzzy sets."""
+    for fset in fuzzy_sets_dict.values():
         if fset.var == "Age":
             age = app.data[0][1]
             membership = skf.interp_membership(fset.x, fset.y, age)
@@ -98,4 +103,3 @@ def fuzzy(app, fuzzySetsDict):
 
 if __name__ == "__main__":
     main()
-

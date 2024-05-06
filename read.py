@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
+
 import numpy as np
 import skfuzzy as skf
 import matplotlib.pyplot as plt
-from Classes import *
+from classes import *
 
-def readFuzzySetsFile(fleName):
+def readFuzzySetsFile(file_name):
     """
     This function reads a file containing fuzzy set descriptions
-    and returns a dictionary with all of them
+    and returns a dictionary with all of them.
     """
-    fuzzySetsDict = FuzzySetsDict() # dictionary to be returned
-    inputFile = open(fleName, 'r')
+    fuzzySetsDict = FuzzySetsDict()
+    inputFile = open(file_name, 'r', encoding='utf-8')
     line = inputFile.readline()
     while line != '':
-        fuzzySet = FuzzySet()   # just one fuzzy set
+        fuzzySet = FuzzySet()
         elementsList = line.split(', ')
         setid = elementsList[0]
         var_label=setid.split('=')
@@ -70,4 +71,3 @@ def readApplicationsFile():
         line = inputFile.readline()
     inputFile.close()
     return applicationList
-
