@@ -37,7 +37,6 @@ def defuzzify(out_fuzzy_sets):
                 dset.append(i)
         set_list.append(dset)
     lmaximum = np.maximum(set_list[0], np.maximum(set_list[1], set_list[2]))
-    #print(lmaximum)
     result = skf.defuzzify.centroid(nums, lmaximum)
     print("Result = ", result)
     return result

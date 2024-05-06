@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 This module contains the classes used in the fuzzy system.
 """
