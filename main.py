@@ -5,6 +5,7 @@ This module is the main module of the project. It reads the input files,
 processes the data andwrites the results to an output file.
 """
 
+
 import numpy as np
 import skfuzzy as skf
 from read import read_fuzzy_sets_file, read_rules_file, read_applications_file
