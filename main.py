@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 This module is the main module of the project. It reads the input files,
 processes the data andwrites the results to an output file.
@@ -20,13 +21,7 @@ def main():
 
     for app in applications:
         fuzzy(app, fuzzy_sets_dict)
-
-        #for fset in fuzzy_sets_dict.values():
-            #print(fset.memDegree)
-
         analyze_rules(rules, fuzzy_sets_dict, out_fuzzy_sets)
-        #for fset in out_fuzzy_sets.values():
-            #fset.printSet()
         result = defuzzify(out_fuzzy_sets)
         result_file.write(str(app.appId)+ " " + str(result) + "\n")
 
@@ -95,7 +90,6 @@ def fuzzy(app, fuzzy_sets_dict):
             print("Error\n")
 
         fset.memDegree = membership
-
 
 if __name__ == "__main__":
     main()
