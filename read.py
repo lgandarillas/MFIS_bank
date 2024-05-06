@@ -1,73 +1,79 @@
 #!/usr/bin/env python3
 
+"""
+Reads the input files, processes the data and writes the results to an output file.
+"""
+
 import numpy as np
 import skfuzzy as skf
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt -> No se usa
 from classes import *
 
-def readFuzzySetsFile(file_name):
+def read_fuzzy_sets_file(file_name):
     """
     This function reads a file containing fuzzy set descriptions
     and returns a dictionary with all of them.
     """
-    fuzzySetsDict = FuzzySetsDict()
-    inputFile = open(file_name, 'r', encoding='utf-8')
-    line = inputFile.readline()
+    fuzzy_sets_dict = FuzzySetsDict()
+    infile = open(file_name, 'r', encoding='utf-8')
+    line = infile.readline()
     while line != '':
-        fuzzySet = FuzzySet()
-        elementsList = line.split(', ')
-        setid = elementsList[0]
+        fuzzy_set = FuzzySet()
+        element_list = line.split(', ')
+        setid = element_list[0]
         var_label=setid.split('=')
-        fuzzySet.var=var_label[0]
-        fuzzySet.label=var_label[1]
+        fuzzy_set.var=var_label[0]
+        fuzzy_set.label=var_label[1]
 
-        xmin = int(elementsList[1])
-        xmax = int(elementsList[2])
-        a = int(elementsList[3])
-        b = int(elementsList[4])
-        c = int(elementsList[5])
-        d = int(elementsList[6])
+        xmin = int(element_list[1])
+        xmax = int(element_list[2])
+        a = int(element_list[3])
+        b = int(element_list[4])
+        c = int(element_list[5])
+        d = int(element_list[6])
         x = np.arange(xmin,xmax,1)
         y = skf.trapmf(x, [a, b, c, d])
-        fuzzySet.x = x
-        fuzzySet.y = y
-        fuzzySetsDict.update( { setid : fuzzySet } )
+        fuzzy_set.x = x
+        fuzzy_set.y = y
+        fuzzy_sets_dict.update( { setid : fuzzy_set } )
 
-        line = inputFile.readline()
-    inputFile.close()
-    return fuzzySetsDict
+        line = infile.readline()
+    infile.close()
+    return fuzzy_sets_dict
 
-def readRulesFile():
-    inputFile = open('Files/Rules.txt', 'r')
+def read_rules_file():
+    """This function reads a file containing rules"""
+    infile = open('Files/Rules.txt', 'r', encoding='utf-8')
     rules = RuleList()
-    line = inputFile.readline()
+    line = infile.readline()
     while line != '':
         rule = Rule()
         line = line.rstrip()
-        elementsList = line.split(', ')
-        rule.ruleName = elementsList[0]
-        rule.consequent = elementsList[1]
+        element_list = line.split(', ')
+        rule.ruleName = element_list[0]
+        rule.consequent = element_list[1]
         lhs = []
-        for i in range(2, len(elementsList), 1):
-            lhs.append(elementsList[i])
+        for i in range(2, len(element_list), 1):
+            lhs.append(element_list[i])
         rule.antecedent = lhs
         rules.append(rule)
-        line = inputFile.readline()
-    inputFile.close()
+        line = infile.readline()
+    infile.close()
     return rules
 
-def readApplicationsFile():
-    inputFile = open('Files/Applications.txt', 'r')
-    applicationList = []
-    line = inputFile.readline()
+def read_applications_file():
+    """This function reads a file containing applications"""
+    infile = open('Files/Applications.txt', 'r', encoding='utf-8')
+    application_list = []
+    line = infile.readline()
     while line != '':
-        elementsList = line.split(', ')
+        element_list = line.split(', ')
         app = Application()
-        app.appId = elementsList[0]
+        app.appId = element_list[0]
         app.data = []
-        for i in range(1, len(elementsList), 2):
-            app.data.append([elementsList[i], int(elementsList[i+1])])
-        applicationList.append(app)
-        line = inputFile.readline()
-    inputFile.close()
-    return applicationList
+        for i in range(1, len(element_list), 2):
+            app.data.append([element_list[i], int(element_list[i+1])])
+        application_list.append(app)
+        line = infile.readline()
+    infile.close()
+    return application_list

@@ -7,15 +7,15 @@ processes the data andwrites the results to an output file.
 import numpy as np
 import skfuzzy as skf
 # import matplotlib.pyplot as plt -> No se usa
-from read import readFuzzySetsFile, readRulesFile, readApplicationsFile
-#from classes import FuzzySetsDict, FuzzySet, RuleList, Rule, Application -> No se usa
+from read import read_fuzzy_sets_file, read_rules_file, read_applications_file
+#from classes import fuzzy_sets_dict, FuzzySet, RuleList, Rule, Application -> No se usa
 
 def main():
     """Reads the input files, processes the data and writes the results to an output file."""
-    fuzzy_sets_dict = readFuzzySetsFile('Files/InputVarSets.txt')
-    out_fuzzy_sets = readFuzzySetsFile('Files/Risks.txt')
-    rules = readRulesFile()
-    applications = readApplicationsFile()
+    fuzzy_sets_dict = read_fuzzy_sets_file('Files/InputVarSets.txt')
+    out_fuzzy_sets = read_fuzzy_sets_file('Files/Risks.txt')
+    rules = read_rules_file()
+    applications = read_applications_file()
     result_file = open('Files/Results.txt', 'w', encoding='utf-8')
 
     for app in applications:
@@ -49,25 +49,20 @@ def defuzzify(out_fuzzy_sets):
     print("Result = ", result)
     return result
 
-def analyze_rules(rules, fuzzySetsDict, out_fuzzy_sets):
+def analyze_rules(rules, fuzzy_sets_dict, out_fuzzy_sets):
     """Analyzes the rules and updates the output fuzzy sets."""
     for fset in out_fuzzy_sets.values():
-            fset.memDegree = 0
+        fset.memDegree = 0
 
     for rule in rules:
-        #print(rule.consequent, rule.antecedent)
         min = 1
 
         for i in range(0, len(rule.antecedent)):
-            var = fuzzySetsDict[rule.antecedent[i]].memDegree
-            #print("Var = ", var)
+            var = fuzzy_sets_dict[rule.antecedent[i]].memDegree
             if var < min:
                 min = var
-                #print("Min = ", min)
-        #print(out_fuzzy_sets[rule.consequent].memDegree)
         if min >= out_fuzzy_sets[rule.consequent].memDegree:
             out_fuzzy_sets[rule.consequent].memDegree = min
-        #print('\n')
 
 def fuzzy(app, fuzzy_sets_dict):
     """Calculates the membership degrees for the input fuzzy sets."""
