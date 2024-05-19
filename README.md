@@ -5,7 +5,7 @@ Este proyecto implica la creación de un Sistema de Ayuda a la Decisión para ev
 2. [Descripción del Código](#descripción-del-código)
    - [Fase 1: Definición de Variables](#fase-1-definición-de-variables)
    - [Fase 2: Definición de Reglas de Inferencia](#fase-2-definición-de-reglas-de-inferencia)
-   - [Funcionamiento del Sistema de Inferencia](#funcionamiento-del-sistema-de-inferencia)
+   - [Fase 3: Funcionamiento del Sistema de Inferencia](#fase-3-funcionamiento-del-sistema-de-inferencia)
 3. [Desarrollado por](#desarrollado-por)
 
 
@@ -40,7 +40,7 @@ El sistema utiliza varias variables para evaluar la solicitud de préstamo, como
 ### Fase 2: Definición de Reglas de Inferencia
 Expertos del banco proporcionan reglas de inferencia en el archivo Rules.txt, donde cada regla especifica el antecedente y el consecuente.
 
-### Funcionamiento del Sistema de Inferencia
+### Fase 3: Funcionamiento del Sistema de Inferencia
 Una vez construido y aceptado el sistema, se aplica diariamente a solicitudes de préstamo en el archivo Applications.txt, generando un archivo de resultados Results.txt con los niveles de riesgo correspondientes.
 
 ## Desarrollado por:
