@@ -1,4 +1,5 @@
-# Sistema de Ayuda a la Decisión para Préstamos Personales
+# [MFIS_bank | UC3M - Artificial Intelligence]
+## Sistema de Ayuda a la Decisión para Préstamos Personales
 Este proyecto implica la creación de un Sistema de Ayuda a la Decisión para evaluar solicitudes de préstamos personales. Se utiliza un Sistema de Inferencia Borroso de Mamdani (MFIS) implementado en Python. El código fuente proporcionado incluye clases para representar conjuntos borrosos, reglas de inferencia y la aplicación del sistema.
 
 1. [Cómo Ejecutar el Proyecto](#cómo-ejecutar-el-proyecto)
